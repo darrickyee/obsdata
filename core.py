@@ -4,7 +4,7 @@ from rx.core.typing import Disposable
 from rx.subject.subject import Subject
 
 
-def mutator(fn: Callable):
+def _mutator(fn: Callable):
 
     @wraps(fn)
     def _fn(obj: 'ObsMixin', *args, **kwargs):
@@ -12,8 +12,9 @@ def mutator(fn: Callable):
 
         value = fn(obj, *args, **kwargs)
 
+        obj._notify()
+
         if obj != old_obj:
-            obj._notify()
 
             for disposer in obj._disposers:
                 disposer.dispose()
@@ -33,7 +34,7 @@ class ObsMixin:
 
     def __new__(cls, *args, **kwargs):
         for method_name in cls._mutators:
-            setattr(cls, method_name, mutator(getattr(super(), method_name)))
+            setattr(cls, method_name, _mutator(getattr(super(), method_name)))
 
         return super().__new__(cls, *args, **kwargs)
 
@@ -42,6 +43,7 @@ class ObsMixin:
 
         self._subject = Subject()
         self.subscribe = self._subject.subscribe
+        self.pipe = self._subject.pipe
 
         self._disposers: list[Disposable] = list()
 
