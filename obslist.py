@@ -1,4 +1,4 @@
-from .core import ObsMixin
+from core import ObsMixin
 
 
 class ObsList(ObsMixin, list):
@@ -15,5 +15,5 @@ class ObsList(ObsMixin, list):
                  'remove',
                  'sort')
 
-    def _get_values(self):
+    def values(self):
         return self

@@ -20,7 +20,7 @@ def _mutator(fn: Callable):
                 disposer.dispose()
 
             obj._disposers = [value.subscribe(lambda _: obj._notify())
-                              for value in obj._get_values()
+                              for value in obj.values()
                               if isinstance(value, ObsMixin)]
 
         return value
@@ -46,9 +46,6 @@ class ObsMixin:
         self.pipe = self._subject.pipe
 
         self._disposers: list[Disposable] = list()
-
-    def _get_values(self):
-        return list()
 
     def _notify(self):
         self._subject.on_next(self)

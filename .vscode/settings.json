@@ -1,4 +1,4 @@
 {
     "python.pythonPath": "C:\\Program Files\\Python39\\python.exe",
-    "python.analysis.extraPaths": ["/"]
+    "python.analysis.extraPaths": ["/", "${workspaceFolder}"]
 }

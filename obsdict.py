@@ -1,4 +1,4 @@
-from .core import ObsMixin
+from core import ObsMixin
 
 
 class ObsDict(ObsMixin, dict):
@@ -11,6 +11,3 @@ class ObsDict(ObsMixin, dict):
                  'popitem',
                  'setdefault',
                  'update')
-
-    def _get_values(self):
-        return self.values()

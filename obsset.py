@@ -1,4 +1,4 @@
-from .core import ObsMixin
+from core import ObsMixin
 
 
 class ObsSet(ObsMixin, set):
@@ -16,3 +16,6 @@ class ObsSet(ObsMixin, set):
                  'remove',
                  'symmetric_difference_update',
                  'update')
+
+    def values(self):
+        return self

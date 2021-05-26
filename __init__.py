@@ -1,11 +1,10 @@
-from typing import Any, Callable
+from typing import Any
 import jsonpointer as jp
-from rx.core.typing import Mapper
 import rx.operators as ops
 
-from .obsdict import ObsDict
-from .obslist import ObsList
-from .obsset import ObsSet
+from obsdict import ObsDict
+from obslist import ObsList
+from obsset import ObsSet
 
 
 def observe_path(obj: ObsDict, path: str):
